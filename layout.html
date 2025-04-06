@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types of Cyber Threats | HackAware</title>
+    <style>
+        :root {
+            --dark-blue: #0A192F;
+            --bright-blue: #00BFFF;
+            --mint-green: #00FF9C;
+            --slate-gray: #708090;
+            --off-white: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-blue);
+            color: var(--off-white);
+            line-height: 1.6;
+        }
+        
+        header {
+            padding: 20px 0;
+            background-color: rgba(10, 25, 47, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--off-white);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--mint-green);
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 60px 0;
+            background: linear-gradient(to right, rgba(10, 25, 47, 0.9), rgba(0, 191, 255, 0.2));
+            margin-bottom: 40px;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: var(--off-white);
+        }
+        
+        .page-header p {
+            font-size: 18px;
+            max-width: 700px;
+            color: var(--off-white);
+            opacity: 0.9;
+        }
+        
+        /* Content Layout */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .main-content {
+            background-color: rgba(10, 25, 47, 0.8);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-content h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--mint-green);
+            border-bottom: 2px solid var(--bright-blue);
+            padding-bottom: 10px;
+        }
+        
+        .main-content h3 {
+            font-size: 22px;
+            margin: 30px 0 15px;
+            color: var(--bright-blue);
+        }
+        
+        .main-content p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .main-content ul, .main-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .main-content li {
+            margin-bottom: 10px;
+        }
+        
+        .main-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .threat-card {
+            background-color: rgba(112, 128, 144, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--bright-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .threat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--mint-green);
+        }
+        
+        .threat-card h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--bright-blue);
+        }
+        
+        .threat-card:hover h4 {
+            color: var(--mint-green);
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .sidebar-widget {
+            background-color: rgba(10, 25, 47, 0.8);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-widget h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--mint-green);
+            border-bottom: 1px solid rgba(112, 128, 144, 0.3);
+            padding-bottom: 10px;
+        }
+        
+        .sidebar-widget ul {
+            list-style: none;
+        }
+        
+        .sidebar-widget ul li {
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(112, 128, 144, 0.1);
+            padding-bottom: 12px;
+        }
+        
+        .sidebar-widget ul li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .sidebar-widget ul li a {
+            color: var(--off-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        
+        .sidebar-widget ul li a:hover {
+            color: var(--mint-green);
+            padding-left: 5px;
+        }
+        
+        .sidebar-cta {
+            background: linear-gradient(135deg, var(--bright-blue), var(--mint-green));
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .sidebar-cta h3 {
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .sidebar-cta p {
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        
+        .sidebar-cta-button {
+            display: block;
+            background-color: var(--dark-blue);
+            color: var(--off-white);
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-cta-button:hover {
+            background-color: rgba(10, 25, 47, 0.8);
+            transform: translateY(-3px);
+        }
+        
+        .related-topics {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(112, 128, 144, 0.2);
+        }
+        
+        .related-topics h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: var(--mint-green);
+            text-align: center;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .related-card {
+            background-color: rgba(10, 25, 47, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .related-card-img {
+            height: 160px;
+            background-color: var(--slate-gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .related-card-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 25, 47, 0.1), rgba(10, 25, 47, 0.7));
+        }
+        
+        .related-card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .related-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--bright-blue);
+        }
+        
+        .related-card p {
+            font-size: 14px;
+            color: var(--off-white);
+            opacity: 0.9;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .related-card a {
+            color: var(--mint-green);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            align-self: flex-start;
+            transition: all 0.3s ease;
+        }
+        
+        .related-card a:hover {
+            color: var(--bright-blue);
+            text-decoration: underline;
+        }
+        
+        .footer {
+            background-color: rgba(10, 25, 47, 0.95);
+            padding: 60px 0 30px;
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--mint-green);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--off-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--bright-blue);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(112, 128, 144, 0.2);
+        }
+        .team-members {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(112, 128, 144, 0.1);
+            border-radius: 8px;
+        }
+        
+        .team-members h3 {
+            margin-bottom: 15px;
+            color: var(--mint-green);
+        }
+        
+        .team-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+        
+        .team-list p {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        
+        
+        /* Responsive Styles */
+        @media screen and (max-width: 900px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: -1;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0 15px 10px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .page-header p {
+                font-size: 16px;
+            }
+            
+            .related-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            .team-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="HackAware Logo">
+                <span class="logo-text">HackAware</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Topics</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="page-header">
+        <div class="container">
+            <h1>Types of Cyber Threats</h1>
+            <p>Understanding the various threats in the digital landscape is crucial to building effective defensive strategies and protecting your digital assets.</p>
+        </div>
+    </div>
+    
+    <div class="container content-layout">
+        <main class="main-content">
+            <h2>Common Types of Cyber Threats</h2>
+            <p>Cyber threats come in many forms and are constantly evolving. Understanding these threats is the first step toward protecting yourself and your organization from potential attacks. This guide examines the most common types of cyber threats and provides practical advice for mitigating each one.</p>
+            
+            <div class="threat-card">
+                <h4>Malware</h4>
+                <p>Malware (malicious software) is any program or file that is designed to harm a computer, network, or server. Common types include:</p>
+                <ul>
+                    <li><strong>Viruses:</strong> Self-replicating programs that spread by inserting copies of themselves into other programs or files.</li>
+                    <li><strong>Worms:</strong> Similar to viruses but can spread independently without host programs.</li>
+                    <li><strong>Trojans:</strong> Malware disguised as legitimate software that can create backdoors for attackers.</li>
+                    <li><strong>Spyware:</strong> Software that collects information about users without their knowledge.</li>
+                </ul>
+            </div>
+            
+            <div class="threat-card">
+                <h4>Phishing</h4>
+                <p>Phishing is a cybercrime where attackers disguise themselves as trustworthy entities to trick victims into revealing sensitive information such as passwords, credit card numbers, or personal data.</p>
+                <p>Common phishing techniques include:</p>
+                <ul>
+                    <li><strong>Email phishing:</strong> Fraudulent emails that appear to come from legitimate organizations.</li>
+                    <li><strong>Spear phishing:</strong> Targeted attacks aimed at specific individuals or organizations.</li>
+                    <li><strong>Whaling:</strong> Phishing attempts directed specifically at senior executives.</li>
+                    <li><strong>Smishing:</strong> Phishing conducted via SMS text messages.</li>
+                    <li><strong>Vishing:</strong> Voice phishing conducted over phone calls.</li>
+                </ul>
+            </div>
+            
+            <div class="threat-card">
+                <h4>Ransomware</h4>
+                <p>Ransomware is a type of malware that encrypts the victim's files and demands a ransom payment for the decryption key. It has become one of the most prevalent and damaging cyber threats to organizations worldwide.</p>
+                <p>Key characteristics include:</p>
+                <ul>
+                    <li>File encryption that renders data inaccessible</li>
+                    <li>Ransom demands, typically in cryptocurrency</li>
+                    <li>Strict deadlines with threats of data destruction</li>
+                    <li>Potential for data exfiltration before encryption ("double extortion")</li>
+                </ul>
+            </div>
+            
+            <div class="threat-card">
+                <h4>Social Engineering</h4>
+                <p>Social engineering is the psychological manipulation of people into performing actions or divulging confidential information. It relies on human error rather than technical hacking techniques.</p>
+                <p>Common social engineering tactics include:</p>
+                <ul>
+                    <li><strong>Pretexting:</strong> Creating a fabricated scenario to obtain information</li>
+                    <li><strong>Baiting:</strong> Offering something enticing to exchange for information</li>
+                    <li><strong>Quid pro quo:</strong> Requesting information in exchange for a service</li>
+                    <li><strong>Tailgating:</strong> Following someone into a secured area</li>
+                </ul>
+            </div>
+            
+            <div class="threat-card">
+                <h4>DDoS Attacks</h4>
+                <p>Distributed Denial of Service (DDoS) attacks aim to make a service unavailable by overwhelming it with traffic from multiple sources. These attacks can target websites, online services, or network infrastructure.</p>
+                <p>Types of DDoS attacks include:</p>
+                <ul>
+                    <li><strong>Volume-based attacks:</strong> Overwhelm bandwidth with massive traffic</li>
+                    <li><strong>Protocol attacks:</strong> Target server resources or networking equipment</li>
+                    <li><strong>Application layer attacks:</strong> Target specific web applications</li>
+                </ul>
+            </div>
+            
+            <h3>Emerging Cyber Threats</h3>
+            <p>The cybersecurity landscape is constantly evolving, with new threats emerging regularly. Some of the most concerning emerging threats include:</p>
+            
+            <div class="threat-card">
+                <h4>AI-Powered Attacks</h4>
+                <p>Artificial intelligence is being leveraged by attackers to create more sophisticated phishing attempts, automate attacks, and evade detection systems. AI can generate convincing deepfakes, personalized phishing messages, and adapt to defensive measures in real-time.</p>
+            </div>
+            
+            <div class="threat-card">
+                <h4>IoT Vulnerabilities</h4>
+                <p>As the Internet of Things (IoT) continues to expand, so do the security risks associated with these devices. Many IoT devices lack proper security controls, creating new entry points for attackers to exploit and potentially gain access to networks.</p>
+            </div>
+            
+            <h3>Protection Strategies</h3>
+            <p>While the threat landscape can seem overwhelming, there are several effective strategies to protect yourself and your organization:</p>
+            
+            <ul>
+                <li><strong>Keep software updated:</strong> Install security patches and updates promptly</li>
+                <li><strong>Use strong authentication:</strong> Implement multi-factor authentication where possible</li>
+                <li><strong>Back up data regularly:</strong> Maintain offline or isolated backups to recover from ransomware</li>
+                <li><strong>Security awareness training:</strong> Educate yourself and your team about common threats and prevention techniques</li>
+                <li><strong>Deploy security tools:</strong> Use anti-malware software, firewalls, and intrusion detection systems</li>
+                <li><strong>Practice the principle of least privilege:</strong> Only grant necessary access permissions</li>
+            </ul>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <h3>In This Article</h3>
+                <ul>
+                    <li><a href="#">Common Types of Cyber Threats</a></li>
+                    <li><a href="#">Malware</a></li>
+                    <li><a href="#">Phishing</a></li>
+                    <li><a href="#">Ransomware</a></li>
+                    <li><a href="#">Social Engineering</a></li>
+                    <li><a href="#">DDoS Attacks</a></li>
+                    <li><a href="#">Emerging Cyber Threats</a></li>
+                    <li><a href="#">Protection Strategies</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h3>Related Topics</h3>
+                <ul>
+                    <li><a href="#">Cybersecurity Basics</a></li>
+                    <li><a href="#">Cyber Hygiene</a></li>
+                    <li><a href="#">Device & Network Protection</a></li>
+                    <li><a href="#">Data Privacy & Protection</a></li>
+                    <li><a href="#">Real-World Incidents</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-cta">
+                <h3>Need Immediate Help?</h3>
+                <p>Our cybersecurity experts can provide guidance for protecting against the latest threats.</p>
+                <a href="#" class="sidebar-cta-button">Contact Support</a>
+            </div>
+        </aside>
+    </div>
+    
+    <div class="container related-topics">
+        <h2>Explore More Topics</h2>
+        <div class="related-grid">
+            <div class="related-card">
+                <div class="related-card-img"></div>
+                <div class="related-card-content">
+                    <h3>Cybersecurity Basics</h3>
+                    <p>Learn the essential concepts and terminology that form the foundation of cybersecurity.</p>
+                    <a href="#">Read More →</a>
+                </div>
+            </div>
+            
+            <div class="related-card">
+                <div class="related-card-img"></div>
+                <div class="related-card-content">
+                    <h3>Cyber Hygiene</h3>
+                    <p>Discover daily practices that keep your digital life secure from common threats.</p>
+                    <a href="#">Read More →</a>
+                </div>
+            </div>
+            
+            <div class="related-card">
+                <div class="related-card-img"></div>
+                <div class="related-card-content">
+                    <h3>Real-World Incidents</h3>
+                    <p>Analyze major security breaches and learn valuable lessons from past attacks.</p>
+                    <a href="#">Read More →</a>
+                </div>
+            </div>
+            
+            <div class="related-card">
+                <div class="related-card-img"></div>
+                <div class="related-card-content">
+                    <h3>Data Privacy</h3>
+                    <p>Understand how to protect your personal information in the digital age.</p>
+                    <a href="#">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HackAware</h3>
+                    <p>Your trusted source for cybersecurity awareness and education.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Topics</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Popular Topics</h3>
+                    <ul>
+                        <li><a href="#">Phishing Prevention</a></li>
+                        <li><a href="#">Password Security</a></li>
+                        <li><a href="#">Ransomware Protection</a></li>
+                        <li><a href="#">Data Breach Response</a></li>
+                        <li><a href="#">Security Frameworks</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#">Email Newsletter</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </footer>
+</body>
+</html>

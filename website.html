@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackAware - Cybersecurity Awareness</title>
+    <style>
+        :root {
+            --dark-blue: #0A192F;
+            --bright-blue: #00BFFF;
+            --mint-green: #00FF9C;
+            --slate-gray: #708090;
+            --off-white: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-blue);
+            color: var(--off-white);
+            line-height: 1.6;
+        }
+        
+        header {
+            padding: 20px 0;
+            background-color: rgba(10, 25, 47, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--off-white);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--mint-green);
+        }
+        
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, rgba(10, 25, 47, 0.8) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            position: relative;
+        }
+        
+        .hero h1 span {
+            color: var(--mint-green);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            color: var(--off-white);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--mint-green);
+            color: var(--dark-blue);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--mint-green);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--mint-green);
+        }
+        
+        .secondary-button {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--bright-blue);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--bright-blue);
+            margin-left: 15px;
+        }
+        
+        .secondary-button:hover {
+            background-color: var(--bright-blue);
+            color: var(--dark-blue);
+        }
+        
+        .topics-section {
+            padding: 80px 0;
+            background-color: rgba(112, 128, 144, 0.05);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--mint-green);
+        }
+        
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--slate-gray);
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .topic-card {
+            background-color: rgba(10, 25, 47, 0.8);
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--bright-blue);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--mint-green);
+        }
+        
+        .topic-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--bright-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .topic-card:hover h3 {
+            color: var(--mint-green);
+        }
+        
+        .topic-card p {
+            color: var(--off-white);
+            font-size: 15px;
+        }
+        
+        .cyber-stats {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--mint-green);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .stat-description {
+            color: var(--slate-gray);
+            font-size: 16px;
+        }
+        
+        .animation-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .footer {
+            background-color: rgba(10, 25, 47, 0.95);
+            padding: 60px 0 30px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--mint-green);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--off-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--bright-blue);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(112, 128, 144, 0.2);
+        }
+        
+        .team-members {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(112, 128, 144, 0.1);
+            border-radius: 8px;
+        }
+        
+        .team-members h3 {
+            margin-bottom: 15px;
+            color: var(--mint-green);
+        }
+        
+        .team-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+        
+        .team-list p {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0 15px 10px 0;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .cta-button, .secondary-button {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin: 10px 0;
+            }
+            
+            .team-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <!-- Using the provided logo image -->
+                <img src="images/logo.png" alt="HackAware Logo">
+                <span class="logo-text">HackAware</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Topics</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="animation-bg">
+            <!-- We'll use CSS for the animation background -->
+        </div>
+        <div class="container hero-content">
+            <h1>Empower Your <span>Digital Defense</span></h1>
+            <p>Learn how to protect yourself, your data, and your organization from cyber threats with expert-led resources and practical guidance.</p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-button">Get Started</a>
+                <a href="#" class="secondary-button">Learn More</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="topics-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore Cybersecurity Topics</h2>
+                <p>Build your knowledge from the fundamentals to advanced concepts in cybersecurity</p>
+            </div>
+            
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <h3>Cybersecurity Basics</h3>
+                    <p>Learn fundamental concepts, terminology, and principles that form the foundation of cybersecurity knowledge.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Types of Cyber Threats</h3>
+                    <p>Understand different types of threats including malware, phishing, ransomware, and social engineering attacks.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Cyber Hygiene</h3>
+                    <p>Discover best practices for maintaining good security habits in your daily digital activities.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Device & Network Protection</h3>
+                    <p>Learn how to secure your devices and networks against unauthorized access and attacks.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Data Privacy & Protection</h3>
+                    <p>Explore methods to safeguard your personal information and understand privacy laws and regulations.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Cybersecurity for Businesses</h3>
+                    <p>Implement security strategies tailored for organizations of all sizes to protect critical assets.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Emerging Technologies</h3>
+                    <p>Stay informed about new technologies like AI, IoT, and blockchain and their security implications.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Cybersecurity Careers</h3>
+                    <p>Explore various career paths in cybersecurity, required skills, and certification guidance.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Real-World Incidents</h3>
+                    <p>Analyze major cyber attacks, data breaches, and security incidents to learn valuable lessons.</p>
+                </div>
+                
+                <div class="topic-card">
+                    <h3>Learning & Resources</h3>
+                    <p>Access curated tools, courses, books, and other resources to continue your cybersecurity education.</p>
+                </div>
+            </div>
+            
+            <div class="cyber-stats">
+                <div class="stat-item">
+                    <span class="stat-number">60%</span>
+                    <span class="stat-description">of small businesses close within 6 months of a cyber attack</span>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-number">$6T</span>
+                    <span class="stat-description">estimated annual cost of cybercrime worldwide by 2025</span>
+                </div>
+                
+                <div class="stat-item">
+                    <span class="stat-number">300%</span>
+                    <span class="stat-description">increase in reported cybercrimes since 2020</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>HackAware</h3>
+                    <p>Your trusted source for cybersecurity awareness and education.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Topics</a></li>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Popular Topics</h3>
+                    <ul>
+                        <li><a href="#">Phishing Prevention</a></li>
+                        <li><a href="#">Password Security</a></li>
+                        <li><a href="#">Ransomware Protection</a></li>
+                        <li><a href="#">Data Breach Response</a></li>
+                        <li><a href="#">Security Frameworks</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#">Email Newsletter</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="team-members">
+                <h3>Team Members</h3>
+                <div class="team-list">
+                    <p>Balang, Clark</p>
+                    <p>Bumanlag, Sean</p>
+                    <p>Cabero, Cyrus Luigi ***</p>
+                    <p>Camaymayan, Xjhann</p>
+                    <p>Mendiola, Sherisse</p>
+                    <p>Reyes, Clint</p>
+                    <p>Roldan, Zedrick</p>
+                    <p>Tancio, Kurt</p>
+                    <p>Valiao, Joaquin</p>
+                    <p>Vargas, Johanne</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
